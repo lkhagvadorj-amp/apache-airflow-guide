@@ -17,6 +17,7 @@ curl -LfO 'https://airflow.apache.org/docs/apache-airflow/2.4.3/docker-compose.y
 
 On Linux, the quick-start needs to know your host user id and needs to have group id set to 0. Otherwise the files created in dags, logs and plugins will be created with root user ownership. You have to make sure to configure them for the docker-compose:
 ```
+cd airflow-docker
 mkdir -p ./dags ./logs ./plugins ./raw_data ./processed_data
 echo -e "AIRFLOW_UID=$(id -u)" > .env
 ```
