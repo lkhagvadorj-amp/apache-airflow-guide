@@ -258,9 +258,7 @@ Resources:
       Name: !Sub "${AWS::StackName}-MwaaEnvironment"
       SourceBucketArn: !GetAtt EnvironmentBucket.Arn
       ExecutionRoleArn: !GetAtt MwaaExecutionRole.Arn
-      DagS3Path: /dags
-      RequirementsS3Path: /requiremets.txt
-      PluginsS3Path: /plugins.zip
+      DagS3Path: dags
       NetworkConfiguration:
         SecurityGroupIds:
           - !GetAtt SecurityGroup.GroupId

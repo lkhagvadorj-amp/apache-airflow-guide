@@ -29,9 +29,8 @@ def tutorial_taskflow_api():
         """
         data_string = '{"1001": 301.27, "1002": 433.21, "1003": 502.22}'
 
-        ################
-        # Code goes to here
-        ################
+        order_data_dict = json.loads(data_string)
+        return order_data_dict
     @task(multiple_outputs=True)
     def transform(order_data_dict: dict):
         """
@@ -39,10 +38,12 @@ def tutorial_taskflow_api():
         A simple Transform task which takes in the collection of order data and
         computes the total order value.
         """
-        ################
-        # Code goes to here
-        ################
+        total_order_value = 0
 
+        for value in order_data_dict.values():
+            total_order_value += value
+
+        return {"total_order_value": total_order_value}
     @task()
     def load(total_order_value: float):
         """
@@ -51,11 +52,7 @@ def tutorial_taskflow_api():
         instead of saving it to end user review, just prints it out.
         """
 
-        ################
-        # Code goes to here
-        ################ 
-
-        
+        print(f"Total order value is: {total_order_value:.2f}")
     order_data = extract()
     order_summary = transform(order_data)
     load(order_summary["total_order_value"])
